@@ -1,0 +1,1 @@
+# 6 Sefer ile Kelime Ezberleme Sistemi
