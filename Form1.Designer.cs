@@ -65,6 +65,7 @@
             this.NameLabel.Size = new System.Drawing.Size(309, 38);
             this.NameLabel.TabIndex = 0;
             this.NameLabel.Text = "Login And Registration";
+
             // 
             // label3
             // 

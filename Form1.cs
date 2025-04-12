@@ -48,6 +48,7 @@ namespace _6_Sefer_ile_Kelime_Ezberleme_Sistemi
 
             int result = sqlCommand.ExecuteNonQuery();
 
+
             if (result > 0)
             {
                 MessageBox.Show("Kayıt Başarılı!");
