@@ -12,9 +12,9 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace _6_Sefer_ile_Kelime_Ezberleme_Sistemi
 {
-    public partial class Form1 : Form
+    public partial class LoginForm : Form
     {
-        public Form1()
+        public LoginForm()
         {
             InitializeComponent();
         }
@@ -87,7 +87,9 @@ namespace _6_Sefer_ile_Kelime_Ezberleme_Sistemi
             // Kullanıcı kontrol 
             if (dataTable.Rows.Count > 0)
             {
-                MessageBox.Show("Giriş Başarılı");
+                MainMenuForm mainmenu = new MainMenuForm();
+                mainmenu.Show();
+                this.Hide();
             }
             else
             {
@@ -134,6 +136,11 @@ namespace _6_Sefer_ile_Kelime_Ezberleme_Sistemi
             {
                 MessageBox.Show("Bu kullanıcı adı bulunamadı!");
             }
+        }
+
+        private void LoginForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

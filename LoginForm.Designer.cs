@@ -1,6 +1,6 @@
 ﻿namespace _6_Sefer_ile_Kelime_Ezberleme_Sistemi
 {
-    partial class Form1
+    partial class LoginForm
     {
         /// <summary>
         ///Gerekli tasarımcı değişkeni.
@@ -276,7 +276,7 @@
             this.resetButton.UseVisualStyleBackColor = false;
             this.resetButton.Click += new System.EventHandler(this.resetButton_Click);
             // 
-            // Form1
+            // LoginForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -302,10 +302,11 @@
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
-            this.Name = "Form1";
+            this.Name = "LoginForm";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "6 Sefer ile Kelime Ezberleme Sistemi";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.LoginForm_FormClosing);
             this.NamePanel.ResumeLayout(false);
             this.NamePanel.PerformLayout();
             this.ResumeLayout(false);
