@@ -21,8 +21,13 @@ namespace _6_Sefer_ile_Kelime_Ezberleme_Sistemi
 
         private void registerButton_Click(object sender, EventArgs e)
         {
-            SqlConnection sqlConnection = new SqlConnection("Data Source=BERATZ\\SQLEXPRESS;Initial Catalog=GameDb;Integrated Security=True");
+            if (string.IsNullOrWhiteSpace(registerUsernameTextBox.Text) || string.IsNullOrWhiteSpace(registerPasswordTextBox.Text))
+            {
+                MessageBox.Show("Lütfen boş bırakmayınız!");
+                return;
+            }
 
+            SqlConnection sqlConnection = new SqlConnection("Data Source=BERATZ\\SQLEXPRESS;Initial Catalog=GameDb;Integrated Security=True");
             sqlConnection.Open();
 
             // Kullanıcı kontrol 
@@ -48,7 +53,6 @@ namespace _6_Sefer_ile_Kelime_Ezberleme_Sistemi
 
             int result = sqlCommand.ExecuteNonQuery();
 
-
             if (result > 0)
             {
                 MessageBox.Show("Kayıt Başarılı!");
@@ -61,10 +65,15 @@ namespace _6_Sefer_ile_Kelime_Ezberleme_Sistemi
 
         private void loginButton_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrWhiteSpace(loginUsernameTextBox.Text) || string.IsNullOrWhiteSpace(loginPasswordTextBox.Text))
+            {
+                MessageBox.Show("Lütfen boş bırakmayınız!");
+                return;
+            }
+
             SqlConnection sqlConnection = new SqlConnection("Data Source=BERATZ\\SQLEXPRESS;Initial Catalog=GameDb;Integrated Security=True");
             sqlConnection.Open();
 
-            
             SqlCommand sqlCommand = new SqlCommand("SELECT UserName, UserPassword FROM tblUser WHERE UserName = @username AND UserPassword = @password", sqlConnection);
 
             // Parametreler
@@ -86,6 +95,45 @@ namespace _6_Sefer_ile_Kelime_Ezberleme_Sistemi
             }
         }
 
-        
+        private void resetButton_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(resetUsernameTextBox.Text) || string.IsNullOrWhiteSpace(resetPasswordTextBox.Text))
+            {
+                MessageBox.Show("Lütfen boş bırakmayınız!");
+                return;
+            }
+
+            SqlConnection sqlConnection = new SqlConnection("Data Source=BERATZ\\SQLEXPRESS;Initial Catalog=GameDb;Integrated Security=True");
+            sqlConnection.Open();
+
+            // Kullanıcı kontrol 
+            SqlCommand checkUserCommand = new SqlCommand("SELECT COUNT(*) FROM tblUser WHERE UserName = @username", sqlConnection);
+            checkUserCommand.Parameters.AddWithValue("@username", resetUsernameTextBox.Text.Trim());
+            int userExists = (int)checkUserCommand.ExecuteScalar();
+
+            if (userExists > 0)
+            {
+                MessageBox.Show("Kullanıcı bulundu!");
+
+                SqlCommand sqlCommand = new SqlCommand("UPDATE tblUser SET UserPassword = @password WHERE UserName = @username", sqlConnection);
+                sqlCommand.Parameters.AddWithValue("@username", resetUsernameTextBox.Text.Trim());
+                sqlCommand.Parameters.AddWithValue("@password", resetPasswordTextBox.Text.Trim());
+
+                int result = sqlCommand.ExecuteNonQuery();
+
+                if (result > 0)
+                {
+                    MessageBox.Show("Güncelleme başarılı!");
+                }
+                else
+                {
+                    MessageBox.Show("Güncelleme başarısız. Lütfen kullanıcı adından emin olun.");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Bu kullanıcı adı bulunamadı!");
+            }
+        }
     }
 }
